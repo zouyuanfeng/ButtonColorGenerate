@@ -1,7 +1,7 @@
 ### 使用教程
 
 ```
-java -jar ButtonColorGenerate.jar #ff479af8 -r 5 -n btn_blue
+java -jar ButtonColorGenerate.jar #ff479af8  -p 10 -r 5 -n btn_blue
 ```
 执行命令后在当前目录中自动生成按钮的selector文件：btn_blue.xml
 ```
@@ -13,6 +13,7 @@ java -jar ButtonColorGenerate.jar #ff479af8 -r 5 -n btn_blue
             <solid android:color="#ff479af8"/>
             <stroke android:color="#ff4596f1" android:width="1dp"/>
             <corners android:radius="5dp"/>
+            <padding android:bottom="10dp" android:left="10dp" android:right="10dp" android:top="10dp"/>
         </shape>
     </item >
     <item  android:state_pressed="true">
@@ -20,6 +21,7 @@ java -jar ButtonColorGenerate.jar #ff479af8 -r 5 -n btn_blue
             <solid android:color="#ff3e86d9"/>
             <stroke android:color="#ff3c82d2" android:width="1dp"/>
             <corners android:radius="5dp"/>
+            <padding android:bottom="10dp" android:left="10dp" android:right="10dp" android:top="10dp"/>
         </shape>
     </item >
     <item  android:state_enabled="false">
@@ -27,9 +29,11 @@ java -jar ButtonColorGenerate.jar #ff479af8 -r 5 -n btn_blue
             <solid android:color="#a5479af8"/>
             <stroke android:color="#e7479af8" android:width="1dp"/>
             <corners android:radius="5dp"/>
+            <padding android:bottom="10dp" android:left="10dp" android:right="10dp" android:top="10dp"/>
         </shape>
     </item >
 </selector>
+
 
 ```
 * 无参或者-h输出帮助
