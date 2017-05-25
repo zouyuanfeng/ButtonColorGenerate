@@ -36,3 +36,6 @@ java -jar ButtonColorGenerate.jar #ff479af8 -r 5 -n btn_blue
 * 第一个参数为十六进制的颜色值（argb或者rgb）
 * -r 参数为圆角半径值
 * -n 参数为生成的文件名称
+
+### 参考
+ColorUtils.java参考了Android-Bootstrap中的[ColorUtils.java](https://github.com/Bearded-Hen/Android-Bootstrap/blob/master/AndroidBootstrap/src/main/java/com/beardedhen/androidbootstrap/utils/ColorUtils.java)
