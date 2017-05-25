@@ -70,6 +70,7 @@ class XmlUtils {
             FileOutputStream file = new FileOutputStream(fileName);
             xml = new XMLWriter(file, xmlFormat);
             xml.write(doucment);
+            System.out.println("\nselector文件生成成功：" + fileName);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

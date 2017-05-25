@@ -21,7 +21,7 @@ public class ColorMain {
                     "options:\n" +
                     " -r\t圆角半径值，默认无圆角\n" +
                     " -p\t内边距" +
-                    " -n\t生成的文件名称\n");
+                    " -n\t生成的文件名称，默认btn_selector.xml\n");
             return;
         }
         if ("".equals(args[0])) {
@@ -33,6 +33,7 @@ public class ColorMain {
                 if ("-r".equals(args[i])) {
                     try {
                         radius = Integer.parseInt(args[i + 1]);
+                        System.out.println("圆角半径值：" + radius + "dp");
                     } catch (NumberFormatException e) {
                         System.out.println("圆角半径值为整数值");
                         e.printStackTrace();
@@ -43,6 +44,7 @@ public class ColorMain {
                 } else if ("-p".equals(args[i])) {
                     try {
                         padding = Integer.parseInt(args[i + 1]);
+                        System.out.println("内边距值：" + padding + "dp");
                     } catch (NumberFormatException e) {
                         System.out.println("内边距值为整数值");
                         e.printStackTrace();
@@ -51,7 +53,7 @@ public class ColorMain {
                 }
             }
         }
-
+        System.out.println("\n颜色:");
         int color = Color.parseColor(args[0]);
         ColorUtils colorUtils = new ColorUtils(color);
         System.out.println("默认状态填充颜色：#" + Integer.toHexString(color));
