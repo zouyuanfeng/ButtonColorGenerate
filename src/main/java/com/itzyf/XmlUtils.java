@@ -18,6 +18,10 @@ class XmlUtils {
     private int radius = 5;
     private String fileName = "btn_selector";
 
+    public static XmlUtils getInstance() {
+        return new XmlUtils();
+    }
+
     void createSelector(SelectorBean bean) {
         Element root = DocumentHelper.createElement("selector");
         Document doucment = DocumentHelper.createDocument(root);

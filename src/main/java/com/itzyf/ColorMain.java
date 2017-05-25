@@ -21,14 +21,16 @@ public class ColorMain {
         if ("".equals(args[0])) {
             throw new IllegalArgumentException("Unknown color");
         }
-
+        //其他参数校验
         if (args.length > 1 && args.length % 2 == 1) {
             for (int i = 1; i < args.length; i += 2) {
                 if ("-r".equals(args[i])) {
                     try {
                         radius = Integer.parseInt(args[i + 1]);
                     } catch (NumberFormatException e) {
-                        System.out.println("-r参数输入异常，需要输入数字");
+                        System.out.println("圆角半径值为整数值");
+                        e.printStackTrace();
+                        return;
                     }
                 } else if ("-n".equals(args[i])) {
                     name = args[i + 1];
@@ -53,7 +55,7 @@ public class ColorMain {
         bean.setDisabledSolidColor(Integer.toHexString(colorUtils.disabledFill()));
         bean.setDisabledStrokeColor(Integer.toHexString(colorUtils.disabledEdge()));
 
-        new XmlUtils().setRadius(radius).setFileName(name).createSelector(bean);
+        XmlUtils.getInstance().setRadius(radius).setFileName(name).createSelector(bean);
 
     }
 }
