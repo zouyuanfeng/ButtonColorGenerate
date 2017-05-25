@@ -35,6 +35,7 @@ java -jar ButtonColorGenerate.jar #ff479af8 -r 5 -n btn_blue
 * 无参或者-h输出帮助
 * 第一个参数为十六进制的颜色值（argb或者rgb）
 * -r 参数为圆角半径值
+* -p 参数为内边距的值
 * -n 参数为生成的文件名称
 
 ### 参考

@@ -13,9 +13,15 @@ public class ColorMain {
      */
     public static void main(String[] args) {
         int radius = 0;
+        int padding = 0;
         String name = "btn_selector";
         if (args.length == 0 || "-h".equals(args[0])) {
-            System.out.println("usage: java -jar ButtonColorGenerate.jar [color] [options]\ncolor\t十六进制颜色值，以#开头，如#ffffff\noptions:\n -r\t圆角半径值，默认无圆角\n -n\t生成的文件名称");
+            System.out.println("usage: java -jar ButtonColorGenerate.jar [color] [options]\n" +
+                    "color\t十六进制颜色值，以#开头，如#ffffff\n" +
+                    "options:\n" +
+                    " -r\t圆角半径值，默认无圆角\n" +
+                    " -p\t内边距" +
+                    " -n\t生成的文件名称\n");
             return;
         }
         if ("".equals(args[0])) {
@@ -34,6 +40,14 @@ public class ColorMain {
                     }
                 } else if ("-n".equals(args[i])) {
                     name = args[i + 1];
+                } else if ("-p".equals(args[i])) {
+                    try {
+                        padding = Integer.parseInt(args[i + 1]);
+                    } catch (NumberFormatException e) {
+                        System.out.println("内边距值为整数值");
+                        e.printStackTrace();
+                        return;
+                    }
                 }
             }
         }
@@ -55,7 +69,11 @@ public class ColorMain {
         bean.setDisabledSolidColor(Integer.toHexString(colorUtils.disabledFill()));
         bean.setDisabledStrokeColor(Integer.toHexString(colorUtils.disabledEdge()));
 
-        XmlUtils.getInstance().setRadius(radius).setFileName(name).createSelector(bean);
+        XmlUtils.getInstance()
+                .setRadius(radius)
+                .setPadding(padding)
+                .setFileName(name)
+                .createSelector(bean);
 
     }
 }

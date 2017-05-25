@@ -17,6 +17,7 @@ class XmlUtils {
 
     private int radius = 5;
     private String fileName = "btn_selector";
+    private int padding = 0;
 
     public static XmlUtils getInstance() {
         return new XmlUtils();
@@ -44,6 +45,11 @@ class XmlUtils {
         if (!fileName.endsWith(".xml"))
             fileName += ".xml";
         this.fileName = fileName;
+        return this;
+    }
+
+    public XmlUtils setPadding(int padding) {
+        this.padding = padding;
         return this;
     }
 
@@ -103,5 +109,11 @@ class XmlUtils {
         shape.addElement("stroke").addAttribute("android:color", "#" + strokeColor).addAttribute("android:width", "1dp");
         if (radius > 0)
             shape.addElement("corners").addAttribute("android:radius", radius + "dp");
+        if (padding > 0)
+            shape.addElement("padding")
+                    .addAttribute("android:bottom", padding + "dp")
+                    .addAttribute("android:left", padding + "dp")
+                    .addAttribute("android:right", padding + "dp")
+                    .addAttribute("android:top", padding + "dp");
     }
 }
