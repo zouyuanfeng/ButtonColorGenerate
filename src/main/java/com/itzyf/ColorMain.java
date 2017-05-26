@@ -1,5 +1,7 @@
 package com.itzyf;
 
+import org.apache.commons.cli.*;
+
 /**
  * @author 依风听雨
  * @version 创建时间：2017/5/25 11:12
@@ -14,47 +16,52 @@ public class ColorMain {
     public static void main(String[] args) {
         int radius = 0;
         int padding = 0;
+        String strColor = null;
         String name = "btn_selector";
-        if (args.length == 0 || "-h".equals(args[0])) {
-            System.out.println("usage: java -jar ButtonColorGenerate.jar [color] [options]\n" +
-                    "color\t十六进制颜色值，以#开头，如#ffffff\n" +
-                    "options:\n" +
-                    " -r\t圆角半径值，默认无圆角\n" +
-                    " -p\t内边距" +
-                    " -n\t生成的文件名称，默认btn_selector.xml\n");
+
+        if (args.length > 0 && args[0].startsWith("#")) {
+            strColor = args[0];
+        }
+        CommandLineParser parser = new DefaultParser();
+        Options options = new Options();
+        options.addOption("h", "help", false, "帮助");
+        options.addOption("p", "padding", true, "设置四个方向上的间隔值（正整数），默认无间隔");
+        options.addOption("f", "filename", true, "文件的名称，默认btn_selector.xml");
+        options.addOption("r", "radius", true, "圆角半径值（正整数），默认无圆角");
+        options.addOption("c", "color", true, "十六进制颜色值，以#开头，如#ffffff");
+        HelpFormatter hf = new HelpFormatter();
+        try {
+            CommandLine commandLine = parser.parse(options, args);
+            if (args.length == 0 || commandLine.hasOption("h")) {
+                hf.printHelp("java -jar ButtonColorGenerate.jar [color] [options]", options);
+                return;
+            }
+            if (commandLine.hasOption("p")) {
+                padding = Integer.parseInt(commandLine.getOptionValue("p"));
+                System.out.println("内边距值：" + padding + "dp");
+            }
+            if (commandLine.hasOption("f")) {
+                name = commandLine.getOptionValue("f");
+            }
+            if (commandLine.hasOption("r")) {
+                radius = Integer.parseInt(commandLine.getOptionValue("r"));
+                System.out.println("圆角半径值：" + radius + "dp");
+            }
+            if (commandLine.hasOption("c")) {
+                strColor = commandLine.getOptionValue("c");
+            }
+        } catch (Exception e) {
+            hf.printHelp("java -jar ButtonColorGenerate.jar [color] [options]", options);
             return;
         }
-        if ("".equals(args[0])) {
-            throw new IllegalArgumentException("Unknown color");
+
+        if ("".equals(strColor)) {
+            hf.printHelp("java -jar ButtonColorGenerate.jar [color] [options]", options);
+            return;
         }
-        //其他参数校验
-        if (args.length > 1 && args.length % 2 == 1) {
-            for (int i = 1; i < args.length; i += 2) {
-                if ("-r".equals(args[i])) {
-                    try {
-                        radius = Integer.parseInt(args[i + 1]);
-                        System.out.println("圆角半径值：" + radius + "dp");
-                    } catch (NumberFormatException e) {
-                        System.out.println("圆角半径值为整数值");
-                        e.printStackTrace();
-                        return;
-                    }
-                } else if ("-n".equals(args[i])) {
-                    name = args[i + 1];
-                } else if ("-p".equals(args[i])) {
-                    try {
-                        padding = Integer.parseInt(args[i + 1]);
-                        System.out.println("内边距值：" + padding + "dp");
-                    } catch (NumberFormatException e) {
-                        System.out.println("内边距值为整数值");
-                        e.printStackTrace();
-                        return;
-                    }
-                }
-            }
-        }
+
         System.out.println("\n颜色:");
-        int color = Color.parseColor(args[0]);
+        int color = Color.parseColor(strColor);
         ColorUtils colorUtils = new ColorUtils(color);
         System.out.println("默认状态填充颜色：#" + Integer.toHexString(color));
         System.out.println("默认状态边缘颜色：#" + Integer.toHexString(colorUtils.defaultEdge()));
@@ -78,4 +85,5 @@ public class ColorMain {
                 .createSelector(bean);
 
     }
+
 }
