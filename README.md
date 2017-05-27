@@ -1,7 +1,7 @@
 ### 使用教程
 
 ```
-java -jar ButtonColorGenerate.jar #ff479af8  -p 10 -r 5 -n btn_blue
+java -jar ButtonColorGenerate.jar #ff479af8  -p 10 -r 5 -f btn_blue
 ```
 执行命令后在当前目录中自动生成按钮的selector文件：btn_blue.xml
 ```
